@@ -1,0 +1,81 @@
+Add more coats of arms and photos
+Make border width selectable (and make wider)
+Make default stack size selectable
+Improve Show All
+Be able to go to viewTree after editing a person etc
+Kirsty and Russell line overlying our children when their parents have ShowMe=False
+
+In family view - Move a child down doesn't work (if its the first child?)
+
+Make the shuffle left and right more efficient - currently itterative
+
+Rethink lSpouse / rSpouse because it goes wrong too often
+
+Add to the family editting screen and to the family right click menu. "Make Wife/Husband prefered". 
+Also add to right click menu on family swap Wife/Husband L/R
+On individual right click menu grey out invalid options
+Move individuals by drag and drop 
+
+Then make sure all return values e.g. 'i=' in html address are typed correctly on receipt
+Then make sure all things read from the html address go through the right function (no avoiding it!) - Make sure its run from globals
+
+When exporting GED file - dont write lines for text where strlen = 0
+
+// If Root is not set in the GED (i.e. the file is not from Affable Genes) call a dialog to select Root at end of import then call
+// show_as_many_as_possible()
+
+// Consider having an alert for hacking - ie attempting to access trees etc that don't belong or where there are no rights - Lock out session?
+// In db_typing - Speed it up and allow stricter testing - e.g. string max and min lengths
+// Change subscription extension to give 3 months at a time
+// Minimise calls to error display - If its a call that should not have been made - ie probably hacking - just die quietly or ignore!
+// Call check_tree (expanded) after GEDCOM import
+// Add menu item in Tree browse to run show_as_many_as_possible() and call it 'Auto Format' - To do the best we can to show as many as possible!!
+// When exporting do I need both SURN etc and NAME as Adrian's
+// Add ability to select (default = yes) UTF-8 first 3 bytes to be added to GED file export
+// One day split up functions.php to minimise computing overhead?
+// Add a whole bunch of comments especially to describe what the includes all do - globals.php, function.php, header.php, etc
+
+TESTING:
+// TEST: All database functions
+// TEST: Import should only look for _EXTENSIONS where originating software is declared as Affable Genes? - DONE but needs testing
+// TEST: When importing GEDCOM only do the default box text if it doesn't already exist - DONE but needs testing
+
+Tree options. Still need to edit:
+-  author
+
+Disable pull down refresh on Chrome when doing treeView (iOS)
+When line_height is too big falls off bottom of image
+
+Allow don't show on an individual - e.g. Jenni - Take care of with right-click menu in view on individual
+Add right click menu on individuals on view screen to:
+        "Edit data..."
+        "Show me" (i.e. dont show this person);
+        "Begins a new stack"
+        "Show all immediate family"
+        "Show parents"
+        "Show children"
+
+Add right click menu on families on view screen to:
+        "Edit family data..."
+        "Make <parent> prefered"
+
+Add hover tips over any 'Cant draw here' symbols on view screen
+ 
+Add the ability to use touch on view screen & perhaps detect if its a mouse & perhaps change tips depending on this
+
+GEDCOMLoader.php   // TODO: Change to use this but have to do all the checks to make sure child is not added twice etc      [position 394:28]	
+                   // TODO: Change to use this but have to do all the checks to make sure parents not added twice etc      [position 406:28]	
+
+viewTree.php	    <!-- TODO remove time - only there to ensure new download each refresh. For Debug -->      [position 70:10]	
+
+Not yet implemented: 
+faq.php	
+edit_source.php	
+selectChild.php	
+selectFather.php
+selectMother.php		
+reportErrors.php - "Look for errors in this tree"	
+
+Notes: 
+- If password has been set to 'Password' Hash is: e6c83b282aeb2e022844595721cc00bbda47cb24537c1779f9bb84f04039e1676e6ba8573e588da1052510e3aa0a32a9e55879ae22b0c2d62136fc0a3e85f8bb
+- To access manage/manage.php make sure usergroup "super". If I forget and delete phpMyAdmin again reinstall from https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/install-LAMP.html
