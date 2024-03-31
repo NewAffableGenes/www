@@ -47,7 +47,7 @@ if (strlen($errorTitle) > 0) {
     header('Pragma: public');
     ob_clean();
     flush();
-    // echo base64_decode($media['content']); 
-    readfile($media_path . $media['content']);
+    echo base64_decode($media['content']); 
+    // readfile($media_path . $media['content']);
     exit;
 }

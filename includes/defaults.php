@@ -102,10 +102,6 @@ function createDefaultTree($mysqli, $userId, $media_path) {
     $data['other_line_font'] = $otherLineFont;
     update_assoc($mysqli, "tree", $treeId, $data);
 
-    // Make a place for the media if it doesn't exist
-    if(!file_exists($media_path)) {
-        mkdir($media_path, 0777);
-    }
     return $treeId;
 }
 

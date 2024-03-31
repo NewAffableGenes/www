@@ -544,7 +544,9 @@ function create_thumbnail($mysqli, $media_id, $max_w, $max_h, $treemedia_path)
                 // echo 'No image<br>';
                 $orig = imagecreatefromjpeg(filter_input(INPUT_SERVER, 'DOCUMENT_ROOT') . '/img/NoImage.jpg');
             } else {
-                $orig = imagecreatefromjpeg($treemedia_path . $object['content']);
+                $data = base64_decode($object['content']);
+                $orig = imagecreatefromstring($data);
+                // $orig = imagecreatefromjpeg($treemedia_path . $object['content']);
             }
         }
         $old_w = imagesx($orig);

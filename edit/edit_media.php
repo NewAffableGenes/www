@@ -79,12 +79,7 @@ if (strlen($errorTitle) > 0) {
 
                 <?php
 
-                $missing = true;
-                if ($object['content'] != null) {
-                    if(file_exists($media_path . $object['content'])) {
-                        $missing = false;
-                    }
-                }
+                $missing = ($object['content'] === null);
 
                 if ($missing) {// Missing - Allow to upload
                     echo '<div class="w3-contaner w3-center">';
@@ -102,17 +97,17 @@ if (strlen($errorTitle) > 0) {
                             switch ($object['format']) {
                                 case "wav":
                                     echo '<embed src="data:' . $object['mime_type'] . '; base64, ' .
-                                    base64_encode(file_get_contents($media_path . $object['content'])) .
+                                    $object['content'] .
                                     '" alt="No preview" width="100%" align="centre" />';
                                     break;
                                 case "pdf":
                                     echo '<iframe src="data:application/pdf; base64,' .
-                                    base64_encode(file_get_contents($media_path . $object['content'])) .
+                                    $object['content'] .
                                     '" alt="No preview" width="100%" height="300" align="centre"></iframe>';
                                     break;
                                 default:
                                     echo '<img src="data:' . $object['mime_type'] . '; base64, ' .
-                                    base64_encode(file_get_contents($media_path . $object['content'])) .
+                                    $object['content'] .
                                     '" alt="No preview" style="max-width:100%" align="centre" />';
                                     break;
                             }

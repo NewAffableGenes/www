@@ -54,7 +54,8 @@ if (strlen($errorTitle) > 0) {
             header('Pragma: public');
             ob_clean();
             flush();
-            readfile($media_path . $media['content']);
+            // readfile($media_path . $media['content']);
+            echo base64_decode($media['content']); 
             exit;
         } else if ($submit == 'confirm') {
             // $redirect = "/edit/edit_$type.php?$short=" . $return[$type];
