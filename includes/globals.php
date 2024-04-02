@@ -8,6 +8,8 @@ include $path . "includes/complex_date.php";
 define('TTF_FONTPATH', $path . 'font');
 define('FPDF_FONTPATH', $path . 'fpdf/font');
 
+$media_path = $path . '../media/';
+
 $backgrounds = [
     ['White', 'background/White.jpg'],
     ['Gray', 'background/Gray.jpg'],
@@ -18,6 +20,10 @@ $backgrounds = [
     ['Sand', 'background/Sand.jpg'],
     ['Distressed', 'background/Distressed.jpg']
 ];
+
+if (!file_exists($media_path)) { 
+    mkdir($media_path,0777); 
+} 
 
 // Safe defaults
 $userId = -1;               // id of currently logged in user

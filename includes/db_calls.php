@@ -58,6 +58,14 @@ function delete_entry($mysqli, $type, $id, $linked_id = null) {
 
     // Now if it really needs deleting...
     if ($delete_entry) {
+        // If its media then delete the file
+        if ($type == 'media') {
+            $pic = read_assoc($mysqli, 'media', $id);
+            if (file_exists($media_path . $pic['content'])) {
+                unlink($media_path . $pic['content']);
+            }
+        }
+
         $query = "DELETE FROM $type WHERE id=$id";
         $ret = ($mysqli->query($query) == TRUE);
         if (!$ret) {

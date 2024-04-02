@@ -78,7 +78,11 @@ if (strlen($errorTitle) > 0) {
                 if (($object['title'] === null) || ($object['title'] === "")) {
                     $object['title'] = $fname;
                 }
-                $object['content'] = base64_encode(file_get_contents($file_tmp));
+                if ($object['content'] !== null) {
+                    unlink($media_path . $object['content']); // delete any existing file
+                }
+                $object['content'] = sprintf('%08d', $object['id']) . '.' . $object['format'];
+                move_uploaded_file($file_tmp, $media_path . $object['content']);
                 update_assoc($mysqli, $type, $return[$type], $object);
                 include $path . 'includes/redirect.php';
             }

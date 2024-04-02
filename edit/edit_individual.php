@@ -147,33 +147,33 @@ if (strlen($errorTitle) > 0) {
                             <button class="w3-button" type="submit" name="submit" 
                                     style="border: 1px solid black; width: 100%; overflow-y: hidden;"
                                     value="/edit/indi_com.php?com=addlmedia&i=<?php echo $return['individual']; ?>">Create / Add</button>
-                        <?php
-                        } else {
-                            $object = read_assoc($mysqli, "media", $indiData['l_media_id']);
-                            echo '<p>Left Media:</p>';
-                            if ($object['content'] === null) {// Missing - Allow to upload
-                                echo '<center><img src="/img/Missing.jpg?1" alt="Missing Media" style="max-width:100%; max-height: 120px;" align="middle"></center>';
-                            } else {
-                                // Show the media if we can 
-                                switch ($object['format']) {
-                                    case "wav":
-                                        echo '<embed src="data:' . $object['mime_type'] . '; base64, ' .
-                                            $object['content'] .
-                                            '" alt="No preview" width="max-width:100%; max-height: 155px;" align="centre" />';
-                                        break;
-                                    case "pdf":
-                                        echo '<iframe src="data:application/pdf; base64,' .
-                                            $object['content'] .
-                                            '" alt="No preview" width="max-width:100%; max-height: 155px;" height="300" align="centre"></iframe>';
-                                        break;
-                                    default:
-                                        echo '<center><img src="data:' . $object['mime_type'] . '; base64, ' .
-                                            $object['content'] .
-                                            '" alt="No preview" style="max-width:100%; max-height: 155px;" align="middle" /></center>';
-                                        break;
-                                }
-                            }
-                            ?>
+                                    <?php
+                                } else {
+                                    $object = read_assoc($mysqli, "media", $indiData['l_media_id']);
+                                    echo '<p>Left Media:</p>';
+                                    if ($object['content'] === null) {// Missing - Allow to upload
+                                        echo '<center><img src="/img/Missing.jpg?1" alt="Missing Media" style="max-width:100%; max-height: 120px;" align="middle"></center>';
+                                    } else {
+                                        // Show the media if we can 
+                                        switch ($object['format']) {
+                                            case "wav":
+                                                echo '<embed src="data:' . $object['mime_type'] . '; base64, ' .
+                                                base64_encode(file_get_contents($media_path . $object['content'])) .
+                                                '" alt="No preview" width="max-width:100%; max-height: 155px;" align="centre" />';
+                                                break;
+                                            case "pdf":
+                                                echo '<iframe src="data:application/pdf; base64,' .
+                                                base64_encode(file_get_contents($media_path . $object['content'])) .
+                                                '" alt="No preview" width="max-width:100%; max-height: 155px;" height="300" align="centre"></iframe>';
+                                                break;
+                                            default:
+                                                echo '<center><img src="data:' . $object['mime_type'] . '; base64, ' .
+                                                base64_encode(file_get_contents($media_path . $object['content'])) .
+                                                '" alt="No preview" style="max-width:100%; max-height: 155px;" align="middle" /></center>';
+                                                break;
+                                        }
+                                    }
+                                    ?>
                             <div class="w3-bar">
                                 <button class="w3-bar-item w3-button w3-white w3-left" style="border: 1px solid black; width:49%" 
                                         type="submit" name="submit" 
@@ -214,33 +214,34 @@ if (strlen($errorTitle) > 0) {
                             <button class="w3-button" type="submit" name="submit" 
                                     style="border: 1px solid black; width: 100%; overflow-y: hidden;"
                                     value="/edit/indi_com.php?com=addrmedia&i=<?php echo $return['individual']; ?>">Create / Add</button>
-                        <?php
-                        } else {
-                            $object = read_assoc($mysqli, "media", $indiData['r_media_id']);
-                            echo '<p>Right Media:</p>';
-                            if ($object['content'] === null) {// Missing - Allow to upload
-                                echo '<center><img src="/img/Missing.jpg?1" alt="Missing Media" style="max-width:100%; max-height: 120px;" align="middle"></center>';
-                            } else {
-                                // Show the media if we can 
-                                switch ($object['format']) {
-                                    case "wav":
-                                        echo '<embed src="data:' . $object['mime_type'] . '; base64, ' .
-                                            $object['content'] .
-                                            '" alt="No preview" width="max-width:100%; height: 155px;" align="centre" />';
-                                        break;
-                                    case "pdf":
-                                        echo '<iframe src="data:application/pdf; base64,' .
-                                            $object['content'] .
-                                            '" alt="No preview" width="max-width:100%; height: 155px;" height="300" align="centre"></iframe>';
-                                        break;
-                                    default:
-                                        echo '<center><img src="data:' . $object['mime_type'] . '; base64, ' .
-                                            $object['content'] .
-                                            '" alt="No preview" style="max-width:100%; height: 155px;" align="middle" /></center>';
-                                        break;
-                                }
-                            }
-                            ?>
+                                    <?php
+                                } else {
+                                    $object = read_assoc($mysqli, "media", $indiData['r_media_id']);
+                                    echo '<p>Right Media:</p>';
+                                    if ($object['content'] === null) {// Missing - Allow to upload
+                                        echo '<center><img src="/img/Missing.jpg?1" alt="Missing Media" style="max-width:100%; max-height: 120px;" align="middle"></center>';
+                                    } else {
+                                        // Show the media if we can 
+                                        // echo $object['format'] . ' ' . $media_path . sprintf('%08d', $treeId) . '<br>';
+                                        switch ($object['format']) {
+                                            case "wav":
+                                                echo '<embed src="data:' . $object['mime_type'] . '; base64, ' .
+                                                base64_encode(file_get_contents($media_path . $object['content'])) .
+                                                '" alt="No preview" width="max-width:100%; height: 155px;" align="centre" />';
+                                                break;
+                                            case "pdf":
+                                                echo '<iframe src="data:application/pdf; base64,' .
+                                                base64_encode(file_get_contents($media_path . $object['content'])) .
+                                                '" alt="No preview" width="max-width:100%; height: 155px;" height="300" align="centre"></iframe>';
+                                                break;
+                                            default:
+                                                echo '<center><img src="data:' . $object['mime_type'] . '; base64, ' .
+                                                base64_encode(file_get_contents($media_path . $object['content'])) .
+                                                '" alt="No preview" style="max-width:100%; height: 155px;" align="middle" /></center>';
+                                                break;
+                                        }
+                                    }
+                                    ?>
                             <div class="w3-bar">
                                 <button class="w3-bar-item w3-button w3-white w3-left" style="border: 1px solid black; width:49%" 
                                         type="submit" name="submit" 

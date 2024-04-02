@@ -11,12 +11,7 @@ if (($server == 'localhost') || ($server == 'www.affablegenes.com')){
     define("HOST", "localhost");     // The host you want to connect to.
     define("USER", "affableg");    // The database username.
     define("PASSWORD", "R1lstone!");    // The database password.
-    define("DATABASE", "affableg");    // The database name
-} else if ($server == '35.178.248.4') {
-    define("HOST", "localhost");     // The host you want to connect to.
-    define("USER", "affableg");    // The database username.
-    define("PASSWORD", "R1lstone!");    // The database password.
-    define("DATABASE", "affableg_db");    // The database name
+    define("DATABASE", "affableg");    // The database name.
 } else {
     echo "Invalid Server = " . $server . "<br>";
     die();

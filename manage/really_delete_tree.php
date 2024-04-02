@@ -50,7 +50,23 @@ if ($userdata['usergroup'] !== 'super') {
                 delete_rows($mysqli, $treeId, 'source');
                 delete_rows($mysqli, $treeId, 'submitter');
                 delete_rows($mysqli, $treeId, 'submitter_link');
-                delete_rows($mysqli, $treeId, 'media');
+
+                // Media separately
+                $media = read_all_assoc($mysqli, 'media', $treeId);
+                foreach ($media as $pic) {
+                    echo "<p>Deleting media " . $pic['content'] . ". ";
+                    if (file_exists($media_path . $pic['content'])) {
+                        $result = unlink($media_path . $pic['content']);
+                        if ($result === false) {
+                            echo '. Fail</p>';
+                        } else {
+                            echo '. Success</p>';
+                        }
+                    } else {
+                        echo '. File gone!</p>';
+                    }
+                    echo "</p>";
+                }
 
                 // Finally the tree itself
                 delete_entry($mysqli, 'tree', $treeId);

@@ -788,7 +788,11 @@ class GEDCOMLoader {
             }
         }
         if (strlen($content) > 0) {
-            $data['content'] = $content;
+            $data['content'] = sprintf('%08d', $data['id']) . '.' . $data['format'];
+            $filename = $treemedia_path . $data['content'];
+            $outfile = fopen($filename, 'wb');
+            fwrite($outfile, base64_decode($content));
+            fclose($outfile);
         } else {
             $data['content'] = null;
         }

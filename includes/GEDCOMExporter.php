@@ -333,12 +333,14 @@ class GEDCOMExporter {
                 $this->WriteLine(1, "", "TITL", "", $title);
             }
             $this->writeFAL($mysqli, 'media', $media['id'], $treeId, 1);
-            if (($this->mediaOption == 'f') && ($media['content'] !== null)) {
+            if (($this->mediaOption == 'f') && ($media['content'] !== null) && (file_exists($media_path.$media['content'])) && (!is_DIR($media_path.$media['content']))) {
                 $this->WriteLine(1, "", "BLOB", "", "");
                 // Note: PHP Base64 Encode uses "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
                 // and GEDCOM wants "./0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
                 // I'm outputting Base64 for ease
-                $lines = str_split($media['content'], 248);
+                $lines = str_split(base64_encode(
+                                file_get_contents($media_path . $media['content'])
+                        ), 248);
                 foreach ($lines as $line) {
                     $this->WriteLine(2, "", "CONT", "", $line);
                 }
